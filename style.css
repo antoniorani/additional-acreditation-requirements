@@ -405,25 +405,103 @@ body {
   letter-spacing: .06em;
 }
 
-.reveal .slides section.present .topbar,
-.reveal .slides section.present .kicker,
+/* Single-pulse animations: one slide advance triggers the full composition. */
+.reveal .slides section.present .topbar {
+  animation: softDown .54s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.reveal .slides section.present .kicker {
+  animation: softUp .54s cubic-bezier(.2,.8,.2,1) .06s both;
+}
+
 .reveal .slides section.present h1,
-.reveal .slides section.present h2,
+.reveal .slides section.present h2 {
+  animation: titleIn .72s cubic-bezier(.16,1,.3,1) .10s both;
+}
+
 .reveal .slides section.present .subtitle,
+.reveal .slides section.present .footnote,
+.reveal .slides section.present .closing-sentence,
+.reveal .slides section.present .ask {
+  animation: softUp .64s cubic-bezier(.2,.8,.2,1) .20s both;
+}
+
 .reveal .slides section.present .legal-stack,
 .reveal .slides section.present .sources-line,
 .reveal .slides section.present .framework-map,
 .reveal .slides section.present .outcome,
-.reveal .slides section.present .timeline,
-.reveal .slides section.present .ask,
-.reveal .slides section.present .footnote,
-.reveal .slides section.present .closing-sentence {
-  animation: rise .56s cubic-bezier(.2,.8,.2,1) both;
+.reveal .slides section.present .timeline {
+  animation: softUp .68s cubic-bezier(.2,.8,.2,1) .16s both;
 }
 
-@keyframes rise {
-  from { opacity: 0; transform: translateY(14px); }
+.reveal .slides section.present .legal-stack div,
+.reveal .slides section.present .sources-line article,
+.reveal .slides section.present .timeline article {
+  animation: itemIn .54s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.reveal .slides section.present .legal-stack div:nth-child(1),
+.reveal .slides section.present .sources-line article:nth-child(1),
+.reveal .slides section.present .timeline article:nth-child(1) { animation-delay: .24s; }
+.reveal .slides section.present .legal-stack div:nth-child(2),
+.reveal .slides section.present .sources-line article:nth-child(2),
+.reveal .slides section.present .timeline article:nth-child(2) { animation-delay: .31s; }
+.reveal .slides section.present .legal-stack div:nth-child(3),
+.reveal .slides section.present .sources-line article:nth-child(3),
+.reveal .slides section.present .timeline article:nth-child(3) { animation-delay: .38s; }
+.reveal .slides section.present .timeline article:nth-child(4) { animation-delay: .45s; }
+.reveal .slides section.present .timeline article:nth-child(5) { animation-delay: .52s; }
+
+.reveal .slides section.present .institution.aepd {
+  animation: fromLeft .64s cubic-bezier(.2,.8,.2,1) .22s both;
+}
+
+.reveal .slides section.present .institution.enac {
+  animation: fromRight .64s cubic-bezier(.2,.8,.2,1) .22s both;
+}
+
+.reveal .slides section.present .connector,
+.reveal .slides section.present .outcome {
+  animation: softUp .62s cubic-bezier(.2,.8,.2,1) .34s both;
+}
+
+.reveal .slides section.present .connector span {
+  animation: drawVertical .7s cubic-bezier(.2,.8,.2,1) .42s both;
+}
+
+@keyframes softUp {
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes softDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes titleIn {
+  from { opacity: 0; transform: translateY(18px) scale(.985); filter: blur(2px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@keyframes itemIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fromLeft {
+  from { opacity: 0; transform: translateX(-18px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fromRight {
+  from { opacity: 0; transform: translateX(18px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes drawVertical {
+  from { opacity: 0; transform: scaleY(.18); }
+  to { opacity: 1; transform: scaleY(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
