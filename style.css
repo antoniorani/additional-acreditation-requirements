@@ -12,7 +12,6 @@
 }
 
 * { box-sizing: border-box; }
-
 html, body { background: var(--paper); }
 
 .reveal {
@@ -91,23 +90,23 @@ html, body { background: var(--paper); }
 
 .brand {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 16px;
   min-width: 0;
 }
 
-.brand img {
-  height: 38px;
-  width: auto;
-  max-width: 170px;
-  object-fit: contain;
+.aepd-wordmark {
+  color: var(--red) !important;
+  font-size: 28px !important;
+  font-weight: 780 !important;
+  letter-spacing: -0.04em !important;
 }
 
-.brand span {
+.brand span:last-child {
   color: var(--blue);
   font-size: 15px;
-  font-weight: 700;
-  letter-spacing: .02em;
+  font-weight: 650;
+  letter-spacing: -0.015em;
 }
 
 .topbar > p {
@@ -401,6 +400,8 @@ html, body { background: var(--paper); }
   background: rgba(20,23,31,.08);
 }
 
+.reveal .controls { color: var(--red); }
+
 .reveal .slide-number {
   right: 34px;
   bottom: 25px;
@@ -411,6 +412,30 @@ html, body { background: var(--paper); }
   letter-spacing: .06em;
 }
 
+.reveal .slides section.present .topbar,
+.reveal .slides section.present .kicker,
+.reveal .slides section.present h1,
+.reveal .slides section.present h2,
+.reveal .slides section.present .subtitle,
+.reveal .slides section.present .legal-stack,
+.reveal .slides section.present .sources-line,
+.reveal .slides section.present .framework-map,
+.reveal .slides section.present .outcome,
+.reveal .slides section.present .timeline,
+.reveal .slides section.present .ask,
+.reveal .slides section.present .footnote,
+.reveal .slides section.present .closing-sentence {
+  animation: rise .56s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal .slides section.present * { animation: none !important; }
+}
 
 @media (max-width: 900px) {
   .reveal .slides section.slide-page { padding: 36px; }
@@ -419,70 +444,8 @@ html, body { background: var(--paper); }
   .framework-map,
   .outcome,
   .timeline,
-  .ask {
-    grid-template-columns: 1fr;
-  }
+  .ask { grid-template-columns: 1fr; }
   .sources-line { grid-template-columns: 1fr; }
   .sources-line article,
   .timeline article { border-right: 0; }
-}
-
-
-/* Fail-safe: the first slide remains visible even if Reveal cannot initialize. */
-html.deck-fallback body {
-  overflow: auto;
-}
-html.deck-fallback .reveal {
-  width: 100%;
-  height: auto;
-}
-html.deck-fallback .reveal .slides {
-  position: static;
-  width: min(1600px, 100vw);
-  height: auto;
-  margin: 0 auto;
-  transform: none !important;
-}
-html.deck-fallback .reveal .slides > section {
-  display: none !important;
-}
-html.deck-fallback .reveal .slides > section:first-child {
-  display: block !important;
-  position: relative !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: none !important;
-  width: 100% !important;
-}
-
-
-/* Motion is progressive enhancement: content is always visible. */
-.reveal [data-animate] {
-  opacity: 1;
-  transform: none;
-}
-
-.reveal .slides section.present [data-animate] {
-  animation: reveal-rise .7s cubic-bezier(.2,.8,.2,1) both;
-}
-
-.reveal .slides section.present [data-animate]:nth-child(2) { animation-delay: .05s; }
-.reveal .slides section.present [data-animate]:nth-child(3) { animation-delay: .10s; }
-.reveal .slides section.present [data-animate]:nth-child(4) { animation-delay: .15s; }
-
-@keyframes reveal-rise {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal .slides section.present [data-animate] {
-    animation: none !important;
-  }
 }
