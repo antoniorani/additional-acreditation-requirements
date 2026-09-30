@@ -15,10 +15,16 @@
 
 html,
 body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
   background: var(--paper);
 }
 
 .reveal {
+  width: 100vw;
+  height: 100vh;
   color: var(--ink);
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -28,7 +34,6 @@ body {
   text-align: left;
 }
 
-/* Important: no fixed height here. Reveal controls slide geometry and scaling. */
 .reveal .slides section.slide-page {
   padding: 58px 72px 62px;
   background:
@@ -73,9 +78,7 @@ body {
   font-weight: 700;
 }
 
-.reveal p {
-  line-height: 1.33;
-}
+.reveal p { line-height: 1.33; }
 
 .topbar {
   display: flex;
@@ -156,9 +159,7 @@ body {
   border-bottom: 1px solid var(--line);
 }
 
-.legal-stack div:last-child {
-  border-bottom: 0;
-}
+.legal-stack div:last-child { border-bottom: 0; }
 
 .legal-stack span,
 .sources-line small,
@@ -214,9 +215,7 @@ body {
   align-items: start;
 }
 
-.statement.compact {
-  gap: 46px;
-}
+.statement.compact { gap: 46px; }
 
 .sources-line {
   display: grid;
@@ -232,13 +231,9 @@ body {
   border-right: 1px solid var(--line);
 }
 
-.sources-line article:last-child {
-  border-right: 0;
-}
+.sources-line article:last-child { border-right: 0; }
 
-.sources-line h3 {
-  margin: 48px 0 18px !important;
-}
+.sources-line h3 { margin: 48px 0 18px !important; }
 
 .sources-line p,
 .institution p,
@@ -330,9 +325,7 @@ body {
   font-weight: 720;
 }
 
-.outcome p {
-  max-width: 280px;
-}
+.outcome p { max-width: 280px; }
 
 .timeline {
   display: grid;
@@ -348,9 +341,7 @@ body {
   border-right: 1px solid var(--line);
 }
 
-.timeline article:last-child {
-  border-right: 0;
-}
+.timeline article:last-child { border-right: 0; }
 
 .timeline article::before {
   content: "";
@@ -370,9 +361,7 @@ body {
   box-shadow: 0 0 0 7px var(--soft-red);
 }
 
-.timeline h3 {
-  margin: 46px 0 14px !important;
-}
+.timeline h3 { margin: 46px 0 14px !important; }
 
 .ask {
   display: grid;
@@ -381,9 +370,7 @@ body {
   align-items: baseline;
 }
 
-.ask p {
-  margin: 0 !important;
-}
+.ask p { margin: 0 !important; }
 
 .ask strong {
   max-width: 900px;
@@ -400,9 +387,7 @@ body {
   background: rgba(20,23,31,.08);
 }
 
-.reveal .controls {
-  color: var(--red);
-}
+.reveal .controls { color: var(--red); }
 
 .reveal .slide-number {
   right: 34px;
@@ -436,31 +421,21 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal .slides section.present * {
-    animation: none !important;
-  }
+  .reveal .slides section.present * { animation: none !important; }
 }
 
 @media (max-width: 900px) {
-  .reveal .slides section.slide-page {
-    padding: 36px;
-  }
+  .reveal .slides section.slide-page { padding: 36px; }
 
   .hero-grid,
   .statement,
   .framework-map,
   .outcome,
   .timeline,
-  .ask {
-    grid-template-columns: 1fr;
-  }
+  .ask { grid-template-columns: 1fr; }
 
-  .sources-line {
-    grid-template-columns: 1fr;
-  }
+  .sources-line { grid-template-columns: 1fr; }
 
   .sources-line article,
-  .timeline article {
-    border-right: 0;
-  }
+  .timeline article { border-right: 0; }
 }
