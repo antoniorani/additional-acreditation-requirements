@@ -207,18 +207,7 @@
 
   <script src="vendor/reveal/reveal.js"></script>
   <script src="vendor/reveal/notes.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script>
-    function animateSlide(slide) {
-      if (!slide || typeof gsap === 'undefined') return;
-      const elements = slide.querySelectorAll('[data-animate]');
-      gsap.killTweensOf(elements);
-      gsap.fromTo(elements,
-        { autoAlpha: 0, y: 18 },
-        { autoAlpha: 1, y: 0, duration: 0.72, stagger: 0.075, ease: 'power3.out', overwrite: true }
-      );
-    }
-
     const revealOptions = {
       width: 1600,
       height: 900,
@@ -235,15 +224,8 @@
 
     if (typeof Reveal !== 'undefined') {
       Reveal.initialize(revealOptions)
-        .then(() => {
-          document.documentElement.classList.add('deck-ready');
-          animateSlide(Reveal.getCurrentSlide());
-        })
-        .catch(() => {
-          document.documentElement.classList.add('deck-fallback');
-        });
-
-      Reveal.on('slidechanged', event => animateSlide(event.currentSlide));
+        .then(() => document.documentElement.classList.add('deck-ready'))
+        .catch(() => document.documentElement.classList.add('deck-fallback'));
     } else {
       document.documentElement.classList.add('deck-fallback');
     }
