@@ -1,5 +1,32 @@
-/* Additional visual polish for the cover slide and timeline.
+/* Additional visual polish: unified header, cover composition and refined timeline.
    Loaded after style.css so it only overrides selected elements. */
+
+/* Shared header across all slides */
+.slide-inner {
+  justify-content: flex-start;
+  padding: 68px 80px 62px;
+}
+
+.topbar {
+  position: relative;
+  margin-bottom: 78px;
+}
+
+.topbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -30px;
+  width: 76px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--red), #f1b434);
+}
+
+.aepd-logo {
+  height: 64px;
+  max-width: 560px;
+}
 
 /* Cover: more intentional Apple/institutional composition */
 .reveal .slides section.slide-page.cover {
@@ -9,39 +36,10 @@
     linear-gradient(180deg, #ffffff 0%, #fffefd 58%, #fffaf5 100%);
 }
 
-.cover .slide-inner {
-  justify-content: flex-start;
-  padding: 68px 80px 62px;
-}
-
-.cover .topbar {
-  margin-bottom: 78px;
-}
-
-.cover .aepd-logo {
-  height: 64px;
-  max-width: 560px;
-}
-
 .cover .hero-grid {
   grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr);
   gap: 86px;
   align-items: center;
-}
-
-.cover .hero-copy {
-  position: relative;
-}
-
-.cover .hero-copy::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: -30px;
-  width: 76px;
-  height: 3px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--red), #f1b434);
 }
 
 .cover h1 {
@@ -101,17 +99,40 @@
   color: #718096;
 }
 
-/* Timeline: slightly stronger hierarchy while remaining minimal */
-.timeline article.today {
-  background:
-    linear-gradient(180deg, rgba(199,71,86,.10), rgba(199,71,86,.026));
-  box-shadow:
-    inset 0 0 0 1px rgba(199,71,86,.13),
-    0 18px 42px rgba(199,71,86,.055);
+/* Non-cover slides: keep the same header geometry while preserving balance */
+.statement-layout,
+.framework-layout,
+.timeline-layout {
+  gap: 46px;
 }
 
-.timeline article.today span {
-  color: var(--red);
+.statement {
+  grid-template-columns: 380px 1fr;
+  gap: 56px;
+}
+
+.sources-line article,
+.institution {
+  min-height: 218px;
+}
+
+.closing-sentence,
+.ask {
+  margin-top: 42px;
+}
+
+/* Timeline: slightly stronger hierarchy while remaining minimal */
+.timeline-layout {
+  gap: 40px;
+}
+
+.timeline-layout .statement.compact {
+  grid-template-columns: 400px 1fr;
+}
+
+.timeline {
+  gap: 18px;
+  padding-top: 44px;
 }
 
 .timeline::before {
@@ -124,11 +145,40 @@
     rgba(31,61,99,.22) 100%);
 }
 
+.timeline article {
+  min-height: 214px;
+  padding-top: 34px;
+}
+
+.timeline article.today {
+  background:
+    linear-gradient(180deg, rgba(199,71,86,.10), rgba(199,71,86,.026));
+  box-shadow:
+    inset 0 0 0 1px rgba(199,71,86,.13),
+    0 18px 42px rgba(199,71,86,.055);
+}
+
+.timeline article.today span {
+  color: var(--red);
+}
+
 @media (max-width: 900px) {
+  .slide-inner,
   .cover .slide-inner {
     padding: 36px;
   }
 
+  .topbar {
+    margin-bottom: 54px;
+  }
+
+  .topbar::after {
+    bottom: -22px;
+    width: 58px;
+    height: 2px;
+  }
+
+  .aepd-logo,
   .cover .aepd-logo {
     height: 44px;
     max-width: 320px;
