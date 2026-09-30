@@ -411,7 +411,6 @@ html, body { background: var(--paper); }
   letter-spacing: .06em;
 }
 
-.reveal:not(.ready) .slides > section:not(:first-child) { display: none; }
 
 @media (max-width: 900px) {
   .reveal .slides section.slide-page { padding: 36px; }
