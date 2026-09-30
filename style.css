@@ -427,3 +427,31 @@ html, body { background: var(--paper); }
   .sources-line article,
   .timeline article { border-right: 0; }
 }
+
+
+/* Fail-safe: the first slide remains visible even if Reveal cannot initialize. */
+html.deck-fallback body {
+  overflow: auto;
+}
+html.deck-fallback .reveal {
+  width: 100%;
+  height: auto;
+}
+html.deck-fallback .reveal .slides {
+  position: static;
+  width: min(1600px, 100vw);
+  height: auto;
+  margin: 0 auto;
+  transform: none !important;
+}
+html.deck-fallback .reveal .slides > section {
+  display: none !important;
+}
+html.deck-fallback .reveal .slides > section:first-child {
+  display: block !important;
+  position: relative !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  width: 100% !important;
+}
