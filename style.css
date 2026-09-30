@@ -1,14 +1,14 @@
 :root {
-  --paper: #faf7f1;
-  --paper-soft: #fffdf9;
+  --outside: #faf7f1;
+  --slide: #ffffff;
   --ink: #111827;
-  --muted: #718096;
-  --line: rgba(27, 55, 92, 0.14);
-  --line-strong: rgba(27, 55, 92, 0.28);
+  --muted: #6f7e8f;
+  --line: rgba(36, 62, 96, 0.14);
+  --line-strong: rgba(36, 62, 96, 0.28);
   --blue: #1f3d63;
   --blue-soft: #eef3f8;
-  --red: #c64656;
-  --red-soft: rgba(198, 70, 86, 0.09);
+  --red: #c74756;
+  --red-soft: rgba(199, 71, 86, 0.09);
   --gold: #a7834f;
 }
 
@@ -20,13 +20,14 @@ body {
   height: 100%;
   margin: 0;
   overflow: hidden;
-  background: var(--paper);
+  background: var(--outside);
 }
 
 .reveal {
   width: 100vw;
   height: 100vh;
   color: var(--ink);
+  background: var(--outside);
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -38,10 +39,11 @@ body {
   height: 100%;
   padding: 0;
   background:
-    radial-gradient(circle at 93% 7%, rgba(31, 61, 99, 0.075), transparent 26%),
-    radial-gradient(circle at 9% 91%, rgba(198, 70, 86, 0.055), transparent 24%),
-    var(--paper);
+    radial-gradient(circle at 94% 7%, rgba(31, 61, 99, 0.045), transparent 24%),
+    radial-gradient(circle at 8% 94%, rgba(199, 71, 86, 0.035), transparent 22%),
+    var(--slide);
   overflow: hidden;
+  box-shadow: 0 18px 48px rgba(31, 61, 99, 0.07);
 }
 
 .slide-inner {
@@ -96,7 +98,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 70px;
+  margin-bottom: 66px;
   font-size: 15px;
 }
 
@@ -108,9 +110,9 @@ body {
 
 .aepd-logo {
   display: block;
-  height: 34px;
+  height: 58px;
   width: auto;
-  max-width: 390px;
+  max-width: 520px;
   object-fit: contain;
 }
 
@@ -355,7 +357,7 @@ body {
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: var(--paper-soft);
+  background: var(--slide);
   border: 1px solid var(--blue);
 }
 
@@ -430,7 +432,7 @@ body {
 
 @media (max-width: 900px) {
   .slide-inner { padding: 36px; }
-  .aepd-logo { height: 28px; max-width: 270px; }
+  .aepd-logo { height: 42px; max-width: 320px; }
 
   .hero-grid,
   .statement,
