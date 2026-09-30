@@ -1,14 +1,15 @@
 :root {
-  --paper: #f8f5ef;
-  --paper-soft: #fbfaf7;
-  --ink: #14171f;
-  --muted: #747b87;
-  --line: rgba(20, 23, 31, 0.14);
-  --line-strong: rgba(20, 23, 31, 0.28);
-  --blue: #263a5a;
-  --red: #b04a50;
-  --gold: #b08b4d;
-  --soft-red: rgba(176, 74, 80, 0.09);
+  --paper: #faf7f1;
+  --paper-soft: #fffdf9;
+  --ink: #111827;
+  --muted: #718096;
+  --line: rgba(27, 55, 92, 0.14);
+  --line-strong: rgba(27, 55, 92, 0.28);
+  --blue: #1f3d63;
+  --blue-soft: #eef3f8;
+  --red: #c64656;
+  --red-soft: rgba(198, 70, 86, 0.09);
+  --gold: #a7834f;
 }
 
 * { box-sizing: border-box; }
@@ -30,17 +31,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.reveal .slides {
-  text-align: left;
-}
+.reveal .slides { text-align: left; }
 
 .reveal .slides section.slide-page {
   width: 100%;
   height: 100%;
   padding: 0;
   background:
-    radial-gradient(circle at 92% 8%, rgba(176, 139, 77, 0.11), transparent 26%),
-    radial-gradient(circle at 8% 92%, rgba(176, 74, 80, 0.06), transparent 24%),
+    radial-gradient(circle at 93% 7%, rgba(31, 61, 99, 0.075), transparent 26%),
+    radial-gradient(circle at 9% 91%, rgba(198, 70, 86, 0.055), transparent 24%),
     var(--paper);
   overflow: hidden;
 }
@@ -51,10 +50,6 @@ body {
   padding: 58px 72px 62px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.cover .slide-inner {
   justify-content: center;
 }
 
@@ -69,6 +64,7 @@ body {
 .reveal h1 {
   max-width: 820px;
   margin: 0;
+  color: var(--ink);
   font-size: 86px;
   line-height: 0.94;
   letter-spacing: -0.072em;
@@ -78,6 +74,7 @@ body {
 .reveal h2 {
   max-width: 1060px;
   margin: 0;
+  color: var(--ink);
   font-size: 70px;
   line-height: 0.97;
   letter-spacing: -0.066em;
@@ -105,23 +102,16 @@ body {
 
 .brand {
   display: flex;
-  align-items: baseline;
-  gap: 16px;
+  align-items: center;
   min-width: 0;
 }
 
-.aepd-wordmark {
-  color: var(--red) !important;
-  font-size: 28px !important;
-  font-weight: 780 !important;
-  letter-spacing: -0.04em !important;
-}
-
-.brand span:last-child {
-  color: var(--blue);
-  font-size: 15px;
-  font-weight: 650;
-  letter-spacing: -0.015em;
+.aepd-logo {
+  display: block;
+  height: 34px;
+  width: auto;
+  max-width: 390px;
+  object-fit: contain;
 }
 
 .topbar > p {
@@ -311,9 +301,9 @@ body {
 .connector strong {
   max-width: 230px;
   padding: 13px 16px;
-  border: 1px solid rgba(176,139,77,.36);
+  border: 1px solid rgba(167, 131, 79, .36);
   border-radius: 999px;
-  background: rgba(176,139,77,.08);
+  background: rgba(167, 131, 79, .08);
   color: var(--blue);
   font-size: 15px;
   line-height: 1.25;
@@ -372,7 +362,7 @@ body {
 .timeline article.today::before {
   background: var(--red);
   border-color: var(--red);
-  box-shadow: 0 0 0 7px var(--soft-red);
+  box-shadow: 0 0 0 7px var(--red-soft);
 }
 
 .timeline h3 { margin: 46px 0 14px !important; }
@@ -398,7 +388,7 @@ body {
 .reveal .progress {
   height: 3px;
   color: var(--red);
-  background: rgba(20,23,31,.08);
+  background: rgba(31, 61, 99, .08);
 }
 
 .reveal .controls { color: var(--red); }
@@ -407,7 +397,7 @@ body {
   right: 34px;
   bottom: 25px;
   background: transparent;
-  color: rgba(20,23,31,.42);
+  color: rgba(31, 61, 99, .42);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: .06em;
@@ -440,6 +430,7 @@ body {
 
 @media (max-width: 900px) {
   .slide-inner { padding: 36px; }
+  .aepd-logo { height: 28px; max-width: 270px; }
 
   .hero-grid,
   .statement,
