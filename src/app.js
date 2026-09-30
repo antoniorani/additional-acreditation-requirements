@@ -9,7 +9,6 @@ const presenterClose = document.querySelector('.presenter-close');
 
 const state = {
   index: getInitialSlideIndex(),
-  fragmentIndex: 0,
   isAnimating: false,
   presenterOpen: new URLSearchParams(window.location.search).get('presenter') === '1',
 };
@@ -29,139 +28,64 @@ function hasGsap() {
   return typeof window.gsap !== 'undefined';
 }
 
-function animateIn(elements, options = {}) {
-  const defaults = { y: 30, opacity: 0, duration: 0.72, stagger: 0.08, ease: 'power3.out' };
-  const settings = { ...defaults, ...options };
+function animateSlideContent(slide) {
+  const items = [...slide.querySelectorAll('.anim')];
+  items.forEach((item) => {
+    item.style.opacity = 0;
+    item.style.transform = 'translateY(18px)';
+  });
 
   if (hasGsap()) {
-    window.gsap.fromTo(
-      elements,
-      { y: settings.y, opacity: settings.opacity, filter: 'blur(8px)' },
-      {
-        y: 0,
-        opacity: 1,
-        filter: 'blur(0px)',
-        duration: settings.duration,
-        stagger: settings.stagger,
-        ease: settings.ease,
-      },
-    );
+    window.gsap.to(items, {
+      opacity: 1,
+      y: 0,
+      duration: 0.72,
+      stagger: 0.08,
+      ease: 'power3.out',
+      clearProps: 'transform,opacity',
+    });
     return;
   }
 
-  [...elements].forEach((el, i) => {
-    el.animate(
+  items.forEach((item, index) => {
+    item.animate(
       [
-        { transform: `translateY(${settings.y}px)`, opacity: settings.opacity, filter: 'blur(8px)' },
-        { transform: 'translateY(0)', opacity: 1, filter: 'blur(0px)' },
+        { opacity: 0, transform: 'translateY(18px)' },
+        { opacity: 1, transform: 'translateY(0px)' },
       ],
       {
-        duration: settings.duration * 1000,
-        delay: i * settings.stagger * 1000,
+        duration: 720,
+        delay: index * 80,
         easing: 'cubic-bezier(.2,.8,.2,1)',
-        fill: 'both',
+        fill: 'forwards',
       },
     );
   });
-}
-
-function animateVisuals(root) {
-  if (!root) return;
-
-  const bars = root.querySelectorAll('.chart-row i');
-  bars.forEach((bar, i) => {
-    const target = bar.style.getPropertyValue('--w') || '70%';
-    bar.style.width = '0';
-    if (hasGsap()) {
-      window.gsap.to(bar, { width: target, duration: 0.9, delay: i * 0.08, ease: 'power3.out' });
-    } else {
-      bar.animate([{ width: '0' }, { width: target }], {
-        duration: 900,
-        delay: i * 80,
-        easing: 'cubic-bezier(.2,.8,.2,1)',
-        fill: 'forwards',
-      });
-    }
-  });
-
-  const bridge = root.querySelector('.bridge span');
-  if (bridge) {
-    if (hasGsap()) {
-      window.gsap.fromTo(bridge, { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: 'power3.out' });
-    } else {
-      bridge.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], {
-        duration: 800,
-        easing: 'cubic-bezier(.2,.8,.2,1)',
-        fill: 'both',
-      });
-    }
-  }
-
-  const timelineLine = root.querySelector('.timeline-line');
-  if (timelineLine) {
-    if (hasGsap()) {
-      window.gsap.fromTo(timelineLine, { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: 'power3.out' });
-    } else {
-      timelineLine.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], {
-        duration: 1000,
-        easing: 'cubic-bezier(.2,.8,.2,1)',
-        fill: 'both',
-      });
-    }
-  }
-
-  const rings = root.querySelectorAll('.scope-ring, .pillar, .actor, .output-card, .timeline-step span');
-  if (rings.length) {
-    animateIn(rings, { y: 18, duration: 0.62, stagger: 0.06 });
-  }
 }
 
 function animateOut(slide, direction = 1) {
   if (hasGsap()) {
-    return window.gsap.to(slide, {
-      opacity: 0,
-      scale: 0.985,
-      x: direction * -28,
-      duration: 0.28,
-      ease: 'power2.in',
+    return new Promise((resolve) => {
+      window.gsap.to(slide, {
+        opacity: 0,
+        scale: 0.993,
+        x: direction * -24,
+        duration: 0.24,
+        ease: 'power2.in',
+        onComplete: resolve,
+      });
     });
   }
 
   const animation = slide.animate(
     [
-      { opacity: 1, transform: 'translateX(0) scale(1)' },
-      { opacity: 0, transform: `translateX(${direction * -28}px) scale(.985)` },
+      { opacity: 1, transform: 'translateX(0px) scale(1)' },
+      { opacity: 0, transform: `translateX(${direction * -24}px) scale(.993)` },
     ],
-    { duration: 280, easing: 'ease-in', fill: 'both' },
+    { duration: 240, easing: 'ease-in', fill: 'forwards' },
   );
 
   return animation.finished;
-}
-
-function resetFragments(slide) {
-  slide.querySelectorAll('.fragment').forEach((fragment) => {
-    fragment.classList.remove('visible');
-    fragment.style.opacity = '';
-    fragment.style.transform = '';
-  });
-
-  slide.querySelectorAll('.chart-row i').forEach((bar) => {
-    bar.style.width = '0';
-  });
-}
-
-function revealFragment() {
-  const slide = slides[state.index];
-  const fragments = [...slide.querySelectorAll('.fragment')];
-  const next = fragments[state.fragmentIndex];
-
-  if (!next) return false;
-
-  next.classList.add('visible');
-  animateIn([next], { y: 18, duration: 0.52, stagger: 0 });
-  animateVisuals(next);
-  state.fragmentIndex += 1;
-  return true;
 }
 
 async function goTo(index, direction = 1) {
@@ -174,10 +98,8 @@ async function goTo(index, direction = 1) {
   current.classList.remove('active');
   current.style.opacity = '';
   current.style.transform = '';
-  resetFragments(current);
 
   state.index = nextIndex;
-  state.fragmentIndex = 0;
   activateCurrentSlide(direction);
   state.isAnimating = false;
 }
@@ -185,42 +107,31 @@ async function goTo(index, direction = 1) {
 function activateCurrentSlide(direction = 1) {
   const slide = slides[state.index];
   slides.forEach((s) => s.classList.toggle('active', s === slide));
-  resetFragments(slide);
 
   if (hasGsap()) {
-    window.gsap.set(slide, { opacity: 1, x: direction * 36, scale: 0.992 });
-    window.gsap.to(slide, { opacity: 1, x: 0, scale: 1, duration: 0.48, ease: 'power3.out' });
+    window.gsap.set(slide, { opacity: 1, x: direction * 26, scale: 0.995 });
+    window.gsap.to(slide, { opacity: 1, x: 0, scale: 1, duration: 0.42, ease: 'power3.out' });
   } else {
     slide.animate(
       [
-        { opacity: 0, transform: `translateX(${direction * 36}px) scale(.992)` },
+        { opacity: 0, transform: `translateX(${direction * 26}px) scale(.995)` },
         { opacity: 1, transform: 'translateX(0) scale(1)' },
       ],
-      { duration: 480, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'both' },
+      { duration: 420, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'both' },
     );
   }
 
-  const introElements = slide.querySelectorAll('.eyebrow, h1, h2, .lead:not(.fragment)');
-  animateIn(introElements, { y: 22, duration: 0.7, stagger: 0.07 });
-
+  animateSlideContent(slide);
   updateHud();
   updateHash();
   updatePresenter();
 }
 
 function next() {
-  if (revealFragment()) return;
   goTo(state.index + 1, 1);
 }
 
 function previous() {
-  const currentFragments = [...slides[state.index].querySelectorAll('.fragment.visible')];
-  if (currentFragments.length > 0) {
-    const last = currentFragments[currentFragments.length - 1];
-    last.classList.remove('visible');
-    state.fragmentIndex = Math.max(0, state.fragmentIndex - 1);
-    return;
-  }
   goTo(state.index - 1, -1);
 }
 
@@ -259,9 +170,6 @@ function toggleFullscreen() {
 }
 
 function replay() {
-  const slide = slides[state.index];
-  state.fragmentIndex = 0;
-  resetFragments(slide);
   activateCurrentSlide(1);
 }
 
