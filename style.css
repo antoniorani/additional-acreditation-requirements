@@ -333,47 +333,95 @@ body {
 
 .outcome p { max-width: 280px; }
 
+.timeline-layout {
+  gap: 46px;
+}
+
+.timeline-layout .statement.compact {
+  grid-template-columns: 420px 1fr;
+}
+
 .timeline {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 0;
-  border-top: 1px solid var(--line-strong);
+  gap: 18px;
+  padding-top: 44px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 8px;
+  right: 8px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(31,61,99,.18), rgba(31,61,99,.10) 28%, rgba(199,71,86,.38) 32%, rgba(31,61,99,.10) 42%, rgba(31,61,99,.18));
 }
 
 .timeline article {
   position: relative;
-  min-height: 245px;
-  padding: 36px 24px 0 0;
-  border-right: 1px solid var(--line);
+  min-height: 214px;
+  padding: 34px 24px 22px 0;
 }
-
-.timeline article:last-child { border-right: 0; }
 
 .timeline article::before {
   content: "";
   position: absolute;
-  top: -7px;
+  top: -32px;
   left: 0;
-  width: 13px;
-  height: 13px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background: var(--slide);
-  border: 1px solid var(--blue);
+  border: 1.5px solid var(--blue);
+  box-shadow: 0 0 0 8px rgba(255,255,255,.9);
+}
+
+.timeline article::after {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 7px;
+  width: 1px;
+  height: 216px;
+  background: linear-gradient(180deg, rgba(31,61,99,.15), rgba(31,61,99,.04));
+}
+
+.timeline article.today {
+  padding-left: 22px;
+  padding-right: 20px;
+  border-radius: 26px;
+  background: linear-gradient(180deg, rgba(199,71,86,.075), rgba(199,71,86,.025));
+  box-shadow: inset 0 0 0 1px rgba(199,71,86,.10);
 }
 
 .timeline article.today::before {
   background: var(--red);
   border-color: var(--red);
-  box-shadow: 0 0 0 7px var(--red-soft);
+  box-shadow: 0 0 0 10px var(--red-soft);
+}
+
+.timeline article.today::after {
+  left: 29px;
+  background: linear-gradient(180deg, rgba(199,71,86,.30), rgba(199,71,86,.04));
 }
 
 .timeline h3 { margin: 46px 0 14px !important; }
+
+.timeline article.today h3 {
+  color: var(--red);
+}
 
 .ask {
   display: grid;
   grid-template-columns: 240px 1fr;
   gap: 34px;
   align-items: baseline;
+  margin-top: 44px;
+  padding: 26px 0 0;
+  border-top: 1px solid var(--line);
 }
 
 .ask p { margin: 0 !important; }
@@ -518,6 +566,23 @@ body {
   .outcome,
   .timeline,
   .ask { grid-template-columns: 1fr; }
+
+  .timeline {
+    gap: 16px;
+    padding-top: 0;
+  }
+
+  .timeline::before,
+  .timeline article::before,
+  .timeline article::after { display: none; }
+
+  .timeline article,
+  .timeline article.today {
+    min-height: auto;
+    padding: 20px 0;
+    background: transparent;
+    box-shadow: none;
+  }
 
   .sources-line { grid-template-columns: 1fr; }
 
