@@ -454,3 +454,35 @@ html.deck-fallback .reveal .slides > section:first-child {
   transform: none !important;
   width: 100% !important;
 }
+
+
+/* Motion is progressive enhancement: content is always visible. */
+.reveal [data-animate] {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal .slides section.present [data-animate] {
+  animation: reveal-rise .7s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.reveal .slides section.present [data-animate]:nth-child(2) { animation-delay: .05s; }
+.reveal .slides section.present [data-animate]:nth-child(3) { animation-delay: .10s; }
+.reveal .slides section.present [data-animate]:nth-child(4) { animation-delay: .15s; }
+
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal .slides section.present [data-animate] {
+    animation: none !important;
+  }
+}
