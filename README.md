@@ -27,3 +27,15 @@ Reveal.js is intentionally served from this repository rather than from a CDN. O
 This deck uses a fixed **1600 × 900** canvas. Reveal.js scales the entire slide uniformly to fit the available viewport.
 
 The slide layout must not reflow on mobile. Do not add viewport-width media queries that change columns, spacing, typography or element positions. Narrow screens should display the same 16:9 composition at a smaller scale. `scrollActivationWidth: null` keeps Reveal.js from switching to its mobile scroll layout automatically.
+
+
+## Speaker View slide gallery
+
+Press **S** to open the Reveal.js Speaker View. In that window, press **G** or click **All slides** to open a temporary gallery of every slide.
+
+- Arrow keys: move through thumbnails.
+- Enter or Space: jump to the selected slide.
+- Esc: return to speaker notes.
+- Click a thumbnail: jump directly to that slide.
+
+This feature is implemented in `speaker-gallery.js` and deliberately leaves the vendored Reveal.js notes plugin unchanged.
