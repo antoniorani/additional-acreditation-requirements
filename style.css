@@ -556,40 +556,6 @@ body {
   .reveal .slides section.present * { animation: none !important; }
 }
 
-@media (max-width: 900px) {
-  .slide-inner { padding: 36px; }
-  .aepd-logo { height: 42px; max-width: 320px; }
-
-  .hero-grid,
-  .statement,
-  .framework-map,
-  .outcome,
-  .timeline,
-  .ask { grid-template-columns: 1fr; }
-
-  .timeline {
-    gap: 16px;
-    padding-top: 0;
-  }
-
-  .timeline::before,
-  .timeline article::before,
-  .timeline article::after { display: none; }
-
-  .timeline article,
-  .timeline article.today {
-    min-height: auto;
-    padding: 20px 0;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  .sources-line { grid-template-columns: 1fr; }
-
-  .sources-line article,
-  .timeline article { border-right: 0; }
-}
-
 /* Additional visual polish: unified header, cover composition and refined timeline.
    Loaded after style.css so it only overrides selected elements. */
 
@@ -752,31 +718,4 @@ body {
 
 .timeline article.today span {
   color: var(--red);
-}
-
-@media (max-width: 900px) {
-  .slide-inner,
-  .cover .slide-inner {
-    padding: 36px;
-  }
-
-  .topbar {
-    margin-bottom: 54px;
-  }
-
-  .topbar::after {
-    bottom: -22px;
-    width: 58px;
-    height: 2px;
-  }
-
-  .aepd-logo,
-  .cover .aepd-logo {
-    height: 44px;
-    max-width: 320px;
-  }
-
-  .cover .hero-grid {
-    gap: 34px;
-  }
 }
